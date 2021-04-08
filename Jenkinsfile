@@ -8,8 +8,8 @@ def getFtpPublishProfile(def publishProfilesJson) {
 }
 
 node {
-  withEnv(['AZURE_SUBSCRIPTION_ID=<subscription_id>',
-        'AZURE_TENANT_ID=<tenant_id>']) {
+  withEnv(['AZURE_SUBSCRIPTION_ID=82871f4a-6f7f-44df-a6e6-4d21f47bd2a2',
+        'AZURE_TENANT_ID=96685ea3-b366-4de3-8a70-cd02922d6b52']) {
     stage('init') {
       checkout scm
     }
@@ -19,13 +19,13 @@ node {
     }
   
     stage('deploy') {
-      def resourceGroup = '<resource_group>'
-      def webAppName = '<app_name>'
+      def resourceGroup = 'QuickstartJenkins-rg'
+      def webAppName = 'newjenkins-app-ey8'
       // login Azure
-      withCredentials([usernamePassword(credentialsId: '<service_princial>', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+      withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'JHm12luIPY-bWtR7Q5FaAPM-kDytiPozxr', usernameVariable: 'db8c1084-07a0-4d2c-9e84-3ada7ed688c5')]) {
        sh '''
-          az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
-          az account set -s $AZURE_SUBSCRIPTION_ID
+          az login --service-principal -u db8c1084-07a0-4d2c-9e84-3ada7ed688c5 -p JHm12luIPY-bWtR7Q5FaAPM-kDytiPozxr -t 96685ea3-b366-4de3-8a70-cd02922d6b52
+          az account set -s 82871f4a-6f7f-44df-a6e6-4d21f47bd2a2
         '''
       }
       // get publish settings
